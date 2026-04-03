@@ -8,7 +8,6 @@ const API = import.meta.env.VITE_API_URL || '/api'
 export default function Hero() {
   const btnRef = useRef(null)
 
-  // Magnetic button effect
   const onMouseMove = (e) => {
     const btn = btnRef.current
     if (!btn) return
@@ -23,16 +22,13 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Three.js animated background */}
       <ThreeBackground />
 
-      {/* Radial glow blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent2/8 rounded-full blur-[120px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Terminal badge */}
         <motion.div
@@ -42,7 +38,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-accent/20 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="font-mono text-xs text-gray-400">
+          <span className="font-mono text-xs dark:text-gray-400 text-gray-600">
             <span className="text-accent">~/</span> Available for opportunities
           </span>
         </motion.div>
@@ -54,16 +50,16 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="font-heading text-6xl md:text-8xl font-bold mb-4 leading-none tracking-tight"
         >
-          <span className="text-white">Manan</span>{' '}
+          <span className="dark:text-white text-gray-900">Manan</span>{' '}
           <span className="gradient-text">Rathi</span>
         </motion.h1>
 
-        {/* Typewriter role */}
+        {/* Typewriter role — fixed: text-accent on the typed text for visibility in both modes */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="font-mono text-xl md:text-2xl text-gray-400 mb-8 h-10"
+          className="font-mono text-xl md:text-2xl dark:text-gray-400 text-gray-600 mb-8 h-10"
         >
           <span className="text-accent">$ </span>
           <TypeAnimation
@@ -72,11 +68,10 @@ export default function Hero() {
               'Machine Learning and Deep Learning Enthusiast', 2000,
               'Node.js Backend Engineer', 2000,
               'DSA Teaching Assistant', 2000,
-              'Open Source Contributor', 2000,
             ]}
             repeat={Infinity}
             speed={50}
-            className="text-white"
+            className="text-accent font-semibold"
           />
         </motion.div>
 
@@ -85,7 +80,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="text-gray-400 text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="dark:text-gray-400 text-gray-600 text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           I build performant, scalable web applications with clean code and great UX.
           Based in <span className="text-accent">Jaipur, India</span>. Currently open for internships and full-time roles.
@@ -98,7 +93,6 @@ export default function Hero() {
           transition={{ delay: 1.2 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          {/* Magnetic primary CTA */}
           <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className="relative">
             <a
               ref={btnRef}
@@ -121,7 +115,7 @@ export default function Hero() {
             Download CV (DOCX)
           </a>
 
-          <a href="#contact" className="font-mono text-sm text-gray-400 hover:text-accent transition-colors underline underline-offset-4">
+          <a href="#contact" className="font-mono text-sm dark:text-gray-400 text-gray-600 hover:text-accent transition-colors underline underline-offset-4">
             Let's talk →
           </a>
         </motion.div>

@@ -40,23 +40,21 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-white/5 pt-12 pb-8">
+    <footer className="border-t dark:border-white/5 border-black/8 pt-12 pb-8">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* Top row — brand + nav + socials */}
         <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-10">
 
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <div className="font-mono text-sm">
               <span className="text-accent">&lt;</span>
-              <span className="text-white font-semibold">Manan Rathi</span>
+              <span className="dark:text-white text-gray-900 font-semibold">Manan Rathi</span>
               <span className="text-accent"> /&gt;</span>
             </div>
-            <p className="text-gray-600 text-xs font-mono max-w-[200px] leading-relaxed">
+            <p className="dark:text-gray-600 text-gray-500 text-xs font-mono max-w-[200px] leading-relaxed">
               Full Stack Developer & AI Enthusiast based in Jaipur, IN.
             </p>
-            {/* Open to work badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-green-400/20 bg-green-400/5 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               <span className="font-mono text-[11px] text-green-400">Open to Internships</span>
@@ -70,7 +68,7 @@ export default function Footer() {
                 <button
                   key={link}
                   onClick={() => scrollTo(link)}
-                  className="font-mono text-xs text-gray-500 hover:text-accent transition-colors text-left"
+                  className="font-mono text-xs dark:text-gray-500 text-gray-500 hover:text-accent transition-colors text-left"
                 >
                   {link}
                 </button>
@@ -80,29 +78,25 @@ export default function Footer() {
 
           {/* Socials */}
           <div className="flex flex-col gap-2">
-            <div className="flex flex-col gap-2">
-              {socials.map(s => (
-                <a
-                  key={s.label}
-                  href={s.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 font-mono text-xs text-gray-500 hover:text-accent transition-colors"
-                >
-                  {s.icon}
-                  {s.label}
-                </a>
-              ))}
-            </div>
+            {socials.map(s => (
+              <a
+                key={s.label}
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 font-mono text-xs dark:text-gray-500 text-gray-500 hover:text-accent transition-colors"
+              >
+                {s.icon}
+                {s.label}
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-white/5 mb-6" />
+        <div className="w-full h-px dark:bg-white/5 bg-black/8 mb-6" />
 
-        {/* Bottom row — copyright + built with */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="font-mono text-[11px] text-gray-700">
+          <p className="font-mono text-[11px] dark:text-gray-700 text-gray-400">
             © {year} Manan Rathi. All rights reserved.
           </p>
         </div>

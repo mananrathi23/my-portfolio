@@ -29,14 +29,16 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-dark-bg/80 backdrop-blur-xl border-b border-white/5 shadow-lg'
+          ? isDark
+            ? 'bg-dark-bg/80 backdrop-blur-xl border-b border-white/5 shadow-lg'
+            : 'bg-[#f0efff]/85 backdrop-blur-xl border-b border-black/8 shadow-lg'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#hero" className="font-mono text-accent font-semibold tracking-wider text-sm">
-          &lt;<span className="text-white">MR</span> /&gt;
+          &lt;<span className={isDark ? 'text-white' : 'text-gray-900'}>MR</span> /&gt;
         </a>
 
         {/* Desktop links */}
@@ -45,7 +47,9 @@ export default function Navbar() {
             <li key={l.label}>
               <a
                 href={l.href}
-                className="font-mono text-xs tracking-widest uppercase text-gray-400 hover:text-accent transition-colors duration-200"
+                className={`font-mono text-xs tracking-widest uppercase transition-colors duration-200 hover:text-accent ${
+                  isDark ? 'text-gray-400' : 'text-gray-600'
+                }`}
               >
                 {l.label}
               </a>
@@ -59,7 +63,11 @@ export default function Navbar() {
           <button
             onClick={toggle}
             title="Toggle theme"
-            className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent/40 transition-all duration-200"
+            className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all duration-200 hover:text-accent hover:border-accent/40 ${
+              isDark
+                ? 'border-white/10 text-gray-400'
+                : 'border-black/10 text-gray-600'
+            }`}
           >
             {isDark ? (
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,7 +94,9 @@ export default function Navbar() {
 
           {/* Mobile menu toggle */}
           <button
-            className="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5"
+            className={`md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5 ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}
             onClick={() => setMenuOpen(o => !o)}
           >
             <span className={`block h-px w-6 bg-current transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
@@ -104,7 +114,11 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-dark-bg/95 backdrop-blur-xl border-t border-white/5"
+            className={`md:hidden overflow-hidden backdrop-blur-xl border-t ${
+              isDark
+                ? 'bg-dark-bg/95 border-white/5'
+                : 'bg-[#f0efff]/95 border-black/8'
+            }`}
           >
             <ul className="flex flex-col py-4 px-6 gap-4">
               {links.map(l => (
@@ -112,7 +126,9 @@ export default function Navbar() {
                   <a
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
-                    className="font-mono text-sm text-gray-400 hover:text-accent transition-colors"
+                    className={`font-mono text-sm transition-colors hover:text-accent ${
+                      isDark ? 'text-gray-400' : 'text-gray-600'
+                    }`}
                   >
                     {l.label}
                   </a>

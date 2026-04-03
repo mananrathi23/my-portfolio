@@ -9,7 +9,7 @@ const categories = [
     description: 'Focusing on modular React components, Angular, and high-performance user interfaces with clean, scalable architecture.',
     project: 'Alumni Portal',
     projectDesc: 'University-wide alumni networking platform built with React, Node.js, Express & MongoDB.',
-    videoSrc: null, // Replace with your YouTube embed URL or local path e.g. '/videos/alumni-portal.mp4'
+    videoSrc: null,
     skills: [
       { name: 'React.js',      pct: 85, note: 'Built University Alumni Portal' },
       { name: 'JavaScript',    pct: 82, note: '3+ yrs across multiple projects' },
@@ -24,7 +24,7 @@ const categories = [
     description: 'Building secure, scalable backends with Java Spring Boot and Node.js, supporting both relational and NoSQL architectures.',
     project: 'Student Management System',
     projectDesc: 'Full-stack system with many-to-many DB mappings, teacher mark entry, and course enrollment.',
-    videoSrc: null, // e.g. '/videos/student-mgmt.mp4'
+    videoSrc: null,
     skills: [
       { name: 'Java (Spring Boot)', pct: 80, note: 'Built many-to-many DB mappings' },
       { name: 'Node.js / Express',  pct: 78, note: 'Integrated secure REST APIs at Axestrack' },
@@ -39,7 +39,7 @@ const categories = [
     description: 'Bridging the gap between software and hardware with real-time AI inference and deep learning deployed on edge devices.',
     project: 'ASL Detection on Raspberry Pi 4',
     projectDesc: 'Real-time American Sign Language detection using MediaPipe & Deep Learning deployed on edge hardware.',
-    videoSrc: null, // e.g. '/videos/asl-detection.mp4'
+    videoSrc: null,
     skills: [
       { name: 'Python',        pct: 85, note: 'Model training & data processing' },
       { name: 'Deep Learning', pct: 78, note: 'ASL Detection — LNMIIT Research Internship' },
@@ -53,7 +53,7 @@ const categories = [
     description: 'Version control, API testing, and deployment workflows that keep projects moving fast and staying reliable.',
     project: 'JKLU Feedback System',
     projectDesc: 'University feedback platform with structured student reviews and PostgreSQL-backed insights.',
-    videoSrc: null, // e.g. '/videos/feedback-system.mp4'
+    videoSrc: null,
     skills: [
       { name: 'Git / GitHub', pct: 88, note: 'Daily use, version control' },
       { name: 'Postman',      pct: 82, note: 'API testing & documentation' },
@@ -80,10 +80,10 @@ function SkillBar({ name, pct, note, inView }) {
       onMouseLeave={() => setHovered(false)}
     >
       <div className="flex justify-between items-center mb-1.5">
-        <span className="font-mono text-sm text-gray-300">{name}</span>
+        <span className="font-mono text-sm dark:text-gray-300 text-gray-700">{name}</span>
         <span className="font-mono text-xs text-accent">{pct}%</span>
       </div>
-      <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+      <div className="h-1.5 dark:bg-white/5 bg-gray-200 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: inView ? `${pct}%` : 0 }}
@@ -93,7 +93,7 @@ function SkillBar({ name, pct, note, inView }) {
         />
       </div>
       {hovered && (
-        <div className="absolute right-0 -top-8 glass border border-accent/20 px-3 py-1 rounded-lg text-xs font-mono text-accent whitespace-nowrap z-20">
+        <div className="absolute right-0 -top-8 dark:bg-[#14141e] bg-white border border-accent/20 px-3 py-1 rounded-lg text-xs font-mono text-accent whitespace-nowrap z-20 shadow-lg">
           {note}
         </div>
       )}
@@ -110,17 +110,15 @@ function VideoCard({ category }) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="relative rounded-3xl border border-white/5 bg-white/5 backdrop-blur-xl overflow-hidden flex flex-col"
+      className="relative rounded-3xl border dark:border-white/5 border-gray-200 dark:bg-white/5 bg-white/80 backdrop-blur-xl overflow-hidden flex flex-col shadow-sm"
     >
-      {/* Background glow blobs */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-16 -left-16 w-36 h-36 bg-accent2/10 rounded-full blur-2xl pointer-events-none" />
 
-      {/* ── Video / Placeholder area ── */}
-      <div className="relative w-full aspect-video bg-black/40 overflow-hidden">
+      {/* Video / Placeholder area */}
+      <div className="relative w-full aspect-video dark:bg-black/40 bg-gray-100 overflow-hidden">
         {videoSrc ? (
           videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be') ? (
-            // YouTube embed — ?loop=1&playlist=ID required for YouTube loop
             <iframe
               src={`${videoSrc}${videoSrc.includes('?') ? '&' : '?'}loop=1&playlist=${videoSrc.split('/').pop().split('?')[0]}&autoplay=1&mute=1`}
               title={project}
@@ -129,7 +127,6 @@ function VideoCard({ category }) {
               allowFullScreen
             />
           ) : (
-            // Local mp4 — loop + autoPlay + muted (muted required for autoplay to work in browsers)
             <video
               src={videoSrc}
               controls
@@ -140,14 +137,11 @@ function VideoCard({ category }) {
             />
           )
         ) : (
-          // Placeholder — replace videoSrc above to swap this out
           <div className="w-full h-full flex flex-col items-center justify-center gap-4 select-none">
-            {/* Gradient wash */}
             <div
               className="absolute inset-0 opacity-20"
               style={{ background: 'linear-gradient(135deg, #7c6af7 0%, #f06595 100%)' }}
             />
-            {/* Scanlines */}
             <div
               className="absolute inset-0 opacity-5"
               style={{
@@ -155,8 +149,6 @@ function VideoCard({ category }) {
                   'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.15) 2px, rgba(255,255,255,0.15) 4px)',
               }}
             />
-
-            {/* Animated play button */}
             <div className="relative z-10 flex items-center justify-center">
               <div className="absolute w-20 h-20 rounded-full border border-accent/30 animate-ping opacity-30" />
               <div className="absolute w-14 h-14 rounded-full border border-accent/50 animate-pulse" />
@@ -166,34 +158,30 @@ function VideoCard({ category }) {
                 </svg>
               </div>
             </div>
-
-            {/* Text */}
             <div className="relative z-10 text-center px-6">
               <p className="font-mono text-xs text-accent/80 mb-1">📹 Demo coming soon</p>
-              <p className="font-mono text-xs text-gray-600">
-                Set <code className="text-gray-400">videoSrc</code> in categories to enable
+              <p className="font-mono text-xs dark:text-gray-600 text-gray-500">
+                Set <code className="dark:text-gray-400 text-gray-600">videoSrc</code> in categories to enable
               </p>
             </div>
-
-            {/* Top-right badge */}
-            <div className="absolute top-3 right-3 z-10 px-2 py-1 rounded-md bg-black/40 border border-white/10 font-mono text-xs text-gray-500">
+            <div className="absolute top-3 right-3 z-10 px-2 py-1 rounded-md dark:bg-black/40 bg-white/70 border dark:border-white/10 border-gray-200 font-mono text-xs dark:text-gray-500 text-gray-600">
               {icon} {label}
             </div>
           </div>
         )}
       </div>
 
-      {/* ── Project info below video ── */}
+      {/* Project info below video */}
       <div className="relative z-10 p-5 flex flex-col gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="font-mono text-xs text-gray-400">Project Highlight</span>
+            <span className="font-mono text-xs dark:text-gray-400 text-gray-500">Project Highlight</span>
           </div>
-          <h3 className="text-base font-bold text-white">{project}</h3>
-          <p className="text-xs text-gray-500 leading-relaxed mt-1">{projectDesc}</p>
+          <h3 className="text-base font-bold dark:text-white text-gray-900">{project}</h3>
+          <p className="text-xs dark:text-gray-500 text-gray-600 leading-relaxed mt-1">{projectDesc}</p>
         </div>
-        <p className="text-xs text-gray-600 italic border-t border-white/5 pt-3 leading-relaxed">
+        <p className="text-xs dark:text-gray-600 text-gray-500 italic border-t dark:border-white/5 border-gray-200 pt-3 leading-relaxed">
           {description}
         </p>
       </div>
@@ -216,7 +204,7 @@ export default function Skills() {
         >
           <span className="section-label">Skills</span>
           <h2 className="section-title">Tech I <span className="gradient-text">work with</span></h2>
-          <p className="text-gray-400 max-w-xl mb-12">
+          <p className="dark:text-gray-400 text-gray-600 max-w-xl mb-12">
             Grouped by domain. Hover any bar to see depth of experience.
           </p>
 
@@ -229,7 +217,7 @@ export default function Skills() {
                 className={`px-5 py-2 rounded-full font-mono text-xs border transition-all duration-200 ${
                   active === i
                     ? 'bg-accent text-white border-accent shadow-[0_0_20px_rgba(124,106,247,0.4)]'
-                    : 'border-white/10 text-gray-400 hover:border-accent/40 hover:text-accent'
+                    : 'dark:border-white/10 border-gray-300 dark:text-gray-400 text-gray-600 hover:border-accent/40 hover:text-accent'
                 }`}
               >
                 {c.icon} {c.label}
@@ -239,14 +227,11 @@ export default function Skills() {
 
           {/* Skill bars + video card */}
           <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
-            {/* Left — skill bars */}
             <div className="space-y-6 pt-2">
               {categories[active].skills.map(s => (
                 <SkillBar key={s.name} {...s} inView={inView} />
               ))}
             </div>
-
-            {/* Right — video card (switches per tab) */}
             <VideoCard category={categories[active]} />
           </div>
 

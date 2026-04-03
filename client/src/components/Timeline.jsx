@@ -68,11 +68,9 @@ export default function Timeline() {
         >
           <span className="section-label">Journey</span>
           <h2 className="section-title">Education &amp; <span className="gradient-text">Experience</span></h2>
-          <p className="text-gray-400 max-w-xl mb-16">My path from classroom to codebase.</p>
+          <p className="dark:text-gray-400 text-gray-600 max-w-xl mb-16">My path from classroom to codebase.</p>
 
-          {/* Vertical timeline */}
           <div className="relative">
-            {/* Center line — hidden on mobile, shown on md+ */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/30 to-transparent -translate-x-1/2" />
 
             <div className="space-y-12">
@@ -84,13 +82,10 @@ export default function Timeline() {
                     initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.15 }}
-                    className={`relative flex items-start gap-8
-                      flex-col md:flex-row
-                      ${!isLeft ? 'md:flex-row-reverse' : ''}
-                    `}
+                    className={`relative flex items-start gap-8 flex-col md:flex-row ${!isLeft ? 'md:flex-row-reverse' : ''}`}
                   >
                     {/* Card */}
-                    <div className="flex-1 card border border-white/5 hover:border-accent/20 transition-colors group">
+                    <div className="flex-1 card border dark:border-white/5 border-black/5 hover:border-accent/20 transition-colors group">
                       <div className="flex items-center justify-between mb-2">
                         <span className={`font-mono text-xs px-2 py-0.5 rounded-full border ${
                           item.type === 'work'
@@ -99,20 +94,20 @@ export default function Timeline() {
                         }`}>
                           {item.type === 'work' ? '// experience' : '// education'}
                         </span>
-                        <span className="font-mono text-xs text-gray-600">{item.year}</span>
+                        <span className="font-mono text-xs dark:text-gray-600 text-gray-400">{item.year}</span>
                       </div>
 
-                      <h3 className="font-heading text-lg text-white mb-1 group-hover:text-accent transition-colors">
+                      <h3 className="font-heading text-lg dark:text-white text-gray-900 mb-1 group-hover:text-accent transition-colors">
                         {item.title}
                       </h3>
                       <div className="font-mono text-sm text-accent2 mb-1">{item.org}</div>
-                      <div className="font-mono text-xs text-gray-600 mb-3 flex items-center gap-1">
+                      <div className="font-mono text-xs dark:text-gray-600 text-gray-500 mb-3 flex items-center gap-1">
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         </svg>
                         {item.location}
                       </div>
-                      <p className="text-gray-500 text-sm leading-relaxed mb-4">{item.desc}</p>
+                      <p className="dark:text-gray-500 text-gray-600 text-sm leading-relaxed mb-4">{item.desc}</p>
                       <div className="flex flex-wrap gap-2">
                         {item.tags.map(t => (
                           <span key={t} className="tech-badge text-[11px]">{t}</span>
@@ -120,14 +115,13 @@ export default function Timeline() {
                       </div>
                     </div>
 
-                    {/* Center dot — only visible on md+ */}
+                    {/* Center dot */}
                     <div className="hidden md:flex absolute left-1/2 top-6 -translate-x-1/2 flex-col items-center">
                       <div className="w-10 h-10 rounded-full glass border border-accent/30 flex items-center justify-center text-lg z-10 shadow-[0_0_20px_rgba(124,106,247,0.2)]">
                         {item.icon}
                       </div>
                     </div>
 
-                    {/* Spacer for opposite side on desktop */}
                     <div className="hidden md:block flex-1" />
                   </motion.div>
                 )

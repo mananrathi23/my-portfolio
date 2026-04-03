@@ -70,8 +70,8 @@ function CertCard({ cert, index, inView }) {
       >
         {/* Front */}
         <div
-          className="absolute inset-0 rounded-2xl p-6 flex flex-col justify-between border border-white/5 hover:border-white/10 transition-colors"
-          style={{ backfaceVisibility: 'hidden', background: '#14141e' }}
+          className="absolute inset-0 rounded-2xl p-6 flex flex-col justify-between border dark:border-white/5 border-gray-200 dark:bg-[#14141e] bg-white shadow-sm hover:border-gray-300 dark:hover:border-white/10 transition-colors"
+          style={{ backfaceVisibility: 'hidden' }}
         >
           <div className="flex items-start justify-between">
             <div
@@ -81,29 +81,29 @@ function CertCard({ cert, index, inView }) {
               {cert.icon}
             </div>
             <div className="text-right">
-              <div className="font-mono text-xs text-gray-600">{cert.date}</div>
+              <div className="font-mono text-xs dark:text-gray-600 text-gray-500">{cert.date}</div>
               <div className="font-mono text-xs mt-0.5 truncate max-w-[120px]" style={{ color: cert.color }}>
                 {cert.issuer}
               </div>
             </div>
           </div>
           <div>
-            <h3 className="font-heading text-sm font-semibold text-white leading-snug mb-2">{cert.title}</h3>
-            <div className="font-mono text-[11px] text-gray-600">Click to see details →</div>
+            <h3 className="font-heading text-sm font-semibold dark:text-white text-gray-900 leading-snug mb-2">{cert.title}</h3>
+            <div className="font-mono text-[11px] dark:text-gray-600 text-gray-500">Click to see details →</div>
           </div>
         </div>
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-2xl p-6 flex flex-col justify-between border"
+          className="absolute inset-0 rounded-2xl p-6 flex flex-col justify-between border shadow-sm"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
-            background: `${cert.color}08`,
+            background: `${cert.color}10`,
             borderColor: `${cert.color}30`,
           }}
         >
-          <p className="text-gray-300 text-sm leading-relaxed">{cert.desc}</p>
+          <p className="dark:text-gray-300 text-gray-700 text-sm leading-relaxed">{cert.desc}</p>
           <a
             href={cert.url}
             target="_blank"
@@ -137,7 +137,7 @@ export default function Certifications() {
         >
           <span className="section-label">Achievements</span>
           <h2 className="section-title">Certifications &amp; <span className="gradient-text">Awards</span></h2>
-          <p className="text-gray-400 max-w-xl mb-12">
+          <p className="dark:text-gray-400 text-gray-600 max-w-xl mb-12">
             Click any card to flip it and see details and verification link.
           </p>
 
@@ -146,7 +146,6 @@ export default function Certifications() {
               <CertCard key={cert.title} cert={cert} index={i} inView={inView} />
             ))}
           </div>
-
         </motion.div>
       </div>
     </section>

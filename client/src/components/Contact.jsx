@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
+import { useTheme } from '../context/ThemeContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -47,24 +48,9 @@ const links = [
   },
 ]
 
-const inputBase = [
-  'w-full rounded-xl px-4 py-3',
-  'font-mono text-sm',
-  'transition-all duration-200 outline-none resize-none',
-  'bg-[#12121c] text-[#e8e8f0] placeholder-[#4a4a5a]',
-  '[color-scheme:dark]',
-].join(' ')
-
-const inputClass = (field, errors) =>
-  [
-    inputBase,
-    errors[field]
-      ? 'border border-red-500/60 focus:border-red-500'
-      : 'border border-white/10 focus:border-[#7c6af7]/60 focus:shadow-[0_0_0_3px_rgba(124,106,247,0.12)]',
-  ].join(' ')
-
 export default function Contact() {
   const [ref, inView] = useInView()
+  const { isDark } = useTheme()
   const [form,    setForm]    = useState({ name: '', email: '', message: '', website: '' })
   const [errors,  setErrors]  = useState({})
   const [loading, setLoading] = useState(false)
@@ -92,6 +78,25 @@ export default function Contact() {
     }
   }
 
+  const inputBase = [
+    'w-full rounded-xl px-4 py-3',
+    'font-mono text-sm',
+    'transition-all duration-200 outline-none resize-none',
+    isDark
+      ? 'bg-[#12121c] text-[#e8e8f0] placeholder-[#4a4a5a] [color-scheme:dark]'
+      : 'bg-white text-gray-900 placeholder-gray-400 [color-scheme:light]',
+  ].join(' ')
+
+  const inputClass = (field) =>
+    [
+      inputBase,
+      errors[field]
+        ? 'border border-red-500/60 focus:border-red-500'
+        : isDark
+          ? 'border border-white/10 focus:border-[#7c6af7]/60 focus:shadow-[0_0_0_3px_rgba(124,106,247,0.12)]'
+          : 'border border-black/10 focus:border-[#7c6af7]/60 focus:shadow-[0_0_0_3px_rgba(124,106,247,0.12)]',
+    ].join(' ')
+
   return (
     <section id="contact" className="section dark:bg-dark-bg2/50">
       <div className="max-w-6xl mx-auto px-6">
@@ -105,7 +110,7 @@ export default function Contact() {
           <div>
             <span className="section-label">Contact</span>
             <h2 className="section-title">Let's <span className="gradient-text">Connect</span></h2>
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <p className={`mb-8 leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               I'm actively looking for internships and full-time MERN stack roles.
               Whether you have a project, an opportunity, or just want to say hi — my inbox is always open.
             </p>
@@ -117,8 +122,8 @@ export default function Contact() {
               ].map(item => (
                 <div key={item.label} className="flex items-center gap-3 text-sm">
                   <span className="text-xl">{item.icon}</span>
-                  <span className="text-gray-500">{item.label}:</span>
-                  <span className="text-gray-300">{item.value}</span>
+                  <span className={isDark ? 'text-gray-500' : 'text-gray-500'}>{item.label}:</span>
+                  <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -130,7 +135,11 @@ export default function Contact() {
                   target="_blank"
                   rel="noreferrer"
                   title={l.label}
-                  className="w-11 h-11 rounded-xl glass border border-white/10 flex items-center justify-center text-gray-400 transition-all duration-200 hover:-translate-y-1 hover:border-white/25"
+                  className={`w-11 h-11 rounded-xl glass border flex items-center justify-center transition-all duration-200 hover:-translate-y-1 ${
+                    isDark
+                      ? 'border-white/10 text-gray-400 hover:border-white/25'
+                      : 'border-black/10 text-gray-600 hover:border-black/20'
+                  }`}
                   onMouseEnter={e => { e.currentTarget.style.color = l.color }}
                   onMouseLeave={e => { e.currentTarget.style.color = '' }}
                 >
@@ -160,7 +169,7 @@ export default function Contact() {
                   onChange={onChange}
                   placeholder="Enter Your Name"
                   autoComplete="name"
-                  className={inputClass('name', errors)}
+                  className={inputClass('name')}
                 />
                 {errors.name && <p className="mt-1.5 font-mono text-xs text-red-400">{errors.name}</p>}
               </div>
@@ -173,7 +182,7 @@ export default function Contact() {
                   onChange={onChange}
                   placeholder="Enter Your Email"
                   autoComplete="email"
-                  className={inputClass('email', errors)}
+                  className={inputClass('email')}
                 />
                 {errors.email && <p className="mt-1.5 font-mono text-xs text-red-400">{errors.email}</p>}
               </div>
@@ -185,7 +194,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={onChange}
                   placeholder="Message"
-                  className={inputClass('message', errors)}
+                  className={inputClass('message')}
                 />
                 {errors.message && <p className="mt-1.5 font-mono text-xs text-red-400">{errors.message}</p>}
               </div>
