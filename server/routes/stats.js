@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Contact = require('../models/Contact');
-const DownloadStat = require('../models/DownloadStat');
+const Contact  = require('../models/Contact');
 
 router.get('/', async (req, res) => {
   try {
@@ -10,16 +9,14 @@ router.get('/', async (req, res) => {
     const dbLatency = Date.now() - start;
 
     const totalMessages = await Contact.countDocuments();
-    const totalDownloads = await DownloadStat.countDocuments();
 
     res.json({
-      status: 'online',
-      uptime: Math.floor(process.uptime()),
-      db: 'connected',
+      status:        'online',
+      uptime:        Math.floor(process.uptime()),
+      db:            'connected',
       dbLatency,
       totalMessages,
-      totalDownloads,
-      timestamp: new Date().toISOString()
+      timestamp:     new Date().toISOString()
     });
   } catch (err) {
     res.status(500).json({ status: 'error', error: err.message });

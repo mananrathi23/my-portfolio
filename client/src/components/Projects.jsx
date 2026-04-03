@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import axios from 'axios'
-
-const API = import.meta.env.VITE_API_URL || '/api'
 
 const STATIC_PROJECTS = [
   {
@@ -39,7 +36,7 @@ const STATIC_PROJECTS = [
   {
     _id: '4',
     title: 'Triply – Travel Platform',
-    description: 'Group travel management app with real-time expense splitting and itinerary planning. Built during LNMIIT\'s LNMHacks 7.0 Hackathon.',
+    description: "Group travel management app with real-time expense splitting and itinerary planning. Built during LNMIIT's LNMHacks 7.0 Hackathon.",
     techStack: ['Java', 'PostgreSQL', 'JavaScript', 'HTML/CSS'],
     githubUrl: 'https://github.com/mananrathi23/Triply_LnmHacks/tree/master',
     liveUrl: null,
@@ -57,23 +54,22 @@ const STATIC_PROJECTS = [
     status: 'Completed',
   },
   {
-  _id: '6',
-  title: 'Image Captioning System',
-  description: 'An end-to-end Deep Learning pipeline that generates descriptive natural language captions for uploaded images.',
-  techStack: ['Python', 'PyTorch', 'CNN (InceptionV3)', 'RNN (LSTM)', 'NLTK'],
-  githubUrl: 'https://github.com/mananrathi23/Image_Captioning_Project',
-  liveUrl: null,
-  challenge: 'Solved the vanishing gradient problem in the LSTM decoder and optimized the CNN-RNN encoder-decoder architecture for faster inference.',
-  status: 'Completed',
-},
+    _id: '6',
+    title: 'Image Captioning System',
+    description: 'An end-to-end Deep Learning pipeline that generates descriptive natural language captions for uploaded images.',
+    techStack: ['Python', 'PyTorch', 'CNN (InceptionV3)', 'RNN (LSTM)', 'NLTK'],
+    githubUrl: 'https://github.com/mananrathi23/Image_Captioning_Project',
+    liveUrl: null,
+    challenge: 'Solved the vanishing gradient problem in the LSTM decoder and optimized the CNN-RNN encoder-decoder architecture for faster inference.',
+    status: 'Completed',
+  },
 ]
 
-// Tags derived from actual project tech stacks
 const ALL_TAGS = ['All', 'Web Projects', 'Machine Learning']
 
 const CATEGORY_MAP = {
   'Web Projects':     ['1', '3', '4', '5'],
-  'Machine Learning': ['2','6'],
+  'Machine Learning': ['2', '6'],
 }
 
 const STATUS_STYLES = {
@@ -94,7 +90,6 @@ function ProjectCard({ project, onClick }) {
       onClick={() => onClick(project)}
       className="card border border-white/5 hover:border-accent/30 cursor-pointer group relative overflow-hidden"
     >
-      {/* Top gradient bar on hover */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent via-accent2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="flex justify-between items-start mb-4">
@@ -116,7 +111,6 @@ function ProjectCard({ project, onClick }) {
             <a href={project.githubUrl} target="_blank" rel="noreferrer"
               onClick={e => e.stopPropagation()}
               className="w-8 h-8 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-              title="View Code"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -127,7 +121,6 @@ function ProjectCard({ project, onClick }) {
             <a href={project.liveUrl} target="_blank" rel="noreferrer"
               onClick={e => e.stopPropagation()}
               className="w-8 h-8 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-accent transition-colors"
-              title="Live Demo"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -142,7 +135,6 @@ function ProjectCard({ project, onClick }) {
       </h3>
       <p className="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-2">{project.description}</p>
 
-      {/* Tech badges */}
       <div className="flex flex-wrap gap-2">
         {project.techStack?.slice(0, 4).map(t => (
           <span key={t} className="tech-badge text-[11px] px-2 py-0.5">{t}</span>
@@ -152,7 +144,6 @@ function ProjectCard({ project, onClick }) {
         )}
       </div>
 
-      {/* Deep dive hint */}
       <div className="mt-4 pt-4 border-t border-white/5 flex items-center gap-1.5 text-xs font-mono text-gray-600 group-hover:text-accent/60 transition-colors">
         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -188,7 +179,6 @@ function Modal({ project, onClose }) {
           ✕
         </button>
 
-        {/* Header */}
         <div className="flex items-center gap-3 mb-2">
           <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
             <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -236,20 +226,13 @@ function Modal({ project, onClose }) {
 }
 
 export default function Projects() {
-  const [ref, inView]       = useInView()
-  const [projects, setProjects] = useState(STATIC_PROJECTS)
-  const [filter, setFilter] = useState('All')
+  const [ref, inView] = useInView()
+  const [filter, setFilter]   = useState('All')
   const [selected, setSelected] = useState(null)
 
-  useEffect(() => {
-    axios.get(`${API}/projects`)
-      .then(r => { if (r.data.length) setProjects(r.data) })
-      .catch(() => {})
-  }, [])
-
   const filtered = filter === 'All'
-    ? projects
-    : projects.filter(p => CATEGORY_MAP[filter]?.includes(p._id))
+    ? STATIC_PROJECTS
+    : STATIC_PROJECTS.filter(p => CATEGORY_MAP[filter]?.includes(p._id))
 
   return (
     <section id="projects" className="section">
@@ -266,7 +249,6 @@ export default function Projects() {
             Click any card for a technical deep-dive. Filter by category.
           </p>
 
-          {/* Filter bar */}
           <div className="flex gap-2 flex-wrap mb-10">
             {ALL_TAGS.map(tag => (
               <button
@@ -283,7 +265,6 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* Empty state */}
           <AnimatePresence mode="wait">
             {filtered.length === 0 && (
               <motion.div
@@ -293,12 +274,11 @@ export default function Projects() {
                 exit={{ opacity: 0 }}
                 className="text-center py-20 text-gray-600 font-mono text-sm"
               >
-                No projects found for <span className="text-accent">"{filter}"</span> yet.
+                No projects in <span className="text-accent">"{filter}"</span> yet.
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Project grid */}
           <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map(p => (
@@ -309,7 +289,6 @@ export default function Projects() {
         </motion.div>
       </div>
 
-      {/* Modal */}
       <AnimatePresence>
         {selected && <Modal project={selected} onClose={() => setSelected(null)} />}
       </AnimatePresence>
