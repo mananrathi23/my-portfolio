@@ -94,7 +94,7 @@ export default function Hero() {
           <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className="relative">
             <a
               ref={btnRef}
-              href="/resume.pdf"
+              href="/Resume.pdf"
               download="MananRathi_Resume.pdf"
               className="btn-primary text-sm px-8 py-4 transition-transform duration-200"
               style={{ display: 'inline-flex' }}
@@ -107,7 +107,7 @@ export default function Hero() {
           </div>
 
           <a
-            href="/resume.docx"
+            href="/Resume.docx"
             download="MananRathi_Resume.docx"
             className="btn-outline text-sm px-8 py-4"
           >

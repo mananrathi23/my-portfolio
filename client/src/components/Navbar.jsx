@@ -82,7 +82,7 @@ export default function Navbar() {
 
           {/* CV button - Desktop */}
           <a
-            href="/resume.pdf"
+            href="/Resume.pdf"
             download="MananRathi_Resume.pdf"
             className="hidden md:inline-flex btn-primary text-xs px-4 py-2"
           >
