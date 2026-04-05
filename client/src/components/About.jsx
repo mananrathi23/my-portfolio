@@ -31,7 +31,7 @@ export default function About() {
               <img
                 src="/profile.jpg"
                 alt="Manan Rathi"
-                className="relative z-10 w-full h-full object-cover object-top rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
+                className="relative z-10 w-full h-full object-cover object-top rounded-2xl transition-all duration-500"
                 onError={e => {
                   e.target.style.display = 'none'
                   e.target.nextSibling.style.display = 'flex'
