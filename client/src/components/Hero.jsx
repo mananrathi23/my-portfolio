@@ -3,8 +3,6 @@ import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import ThreeBackground from './ThreeBackground'
 
-const API = import.meta.env.VITE_API_URL || '/api'
-
 export default function Hero() {
   const btnRef = useRef(null)
 
@@ -54,7 +52,7 @@ export default function Hero() {
           <span className="gradient-text">Rathi</span>
         </motion.h1>
 
-        {/* Typewriter role — fixed: text-accent on the typed text for visibility in both modes */}
+        {/* Typewriter role */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -96,8 +94,8 @@ export default function Hero() {
           <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className="relative">
             <a
               ref={btnRef}
-              href={`${API}/cv/download/pdf`}
-              target="_blank" rel="noreferrer"
+              href="/resume.pdf"
+              download="MananRathi_Resume.pdf"
               className="btn-primary text-sm px-8 py-4 transition-transform duration-200"
               style={{ display: 'inline-flex' }}
             >
@@ -108,7 +106,11 @@ export default function Hero() {
             </a>
           </div>
 
-          <a href={`${API}/cv/download/docx`} target="_blank" rel="noreferrer" className="btn-outline text-sm px-8 py-4">
+          <a
+            href="/resume.docx"
+            download="MananRathi_Resume.docx"
+            className="btn-outline text-sm px-8 py-4"
+          >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
