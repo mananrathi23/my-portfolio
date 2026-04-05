@@ -326,7 +326,7 @@ export default function Skills() {
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 40 }}
           transition={{ duration: 0.7 }}
         >
           <span className="section-label">Skills</span>
@@ -365,7 +365,7 @@ export default function Skills() {
               <motion.span
                 key={tag}
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.8 }}
                 transition={{ delay: i * 0.04, duration: 0.3 }}
                 whileHover={{ scale: 1.1, y: -4 }}
                 className="tech-badge cursor-default select-none"

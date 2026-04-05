@@ -81,7 +81,6 @@ const STATUS_STYLES = {
 function ProjectCard({ project, onClick }) {
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
@@ -227,7 +226,7 @@ function Modal({ project, onClose }) {
 
 export default function Projects() {
   const [ref, inView] = useInView()
-  const [filter, setFilter]   = useState('All')
+  const [filter, setFilter]     = useState('All')
   const [selected, setSelected] = useState(null)
 
   const filtered = filter === 'All'
@@ -240,7 +239,8 @@ export default function Projects() {
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          // ✅ FIX: explicit values instead of empty object
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 40 }}
           transition={{ duration: 0.7 }}
         >
           <span className="section-label">Projects</span>
@@ -279,13 +279,14 @@ export default function Projects() {
             )}
           </AnimatePresence>
 
-          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            <AnimatePresence mode="popLayout">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+            <AnimatePresence mode="sync">
               {filtered.map(p => (
                 <ProjectCard key={p._id} project={p} onClick={setSelected} />
               ))}
             </AnimatePresence>
-          </motion.div>
+          </div>
+
         </motion.div>
       </div>
 
