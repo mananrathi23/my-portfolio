@@ -25,13 +25,13 @@ export default function About() {
           <div className="relative flex justify-center">
             <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl scale-75" />
 
-            <div className="relative w-72 h-72 md:w-80 md:h-80">
+            <div className="relative w-72 md:w-80" style={{ aspectRatio: '3/4' }}>
               <div className="absolute inset-0 rounded-2xl border border-accent/30 rotate-6" />
               <div className="absolute inset-0 rounded-2xl border border-accent2/20 -rotate-3" />
               <img
                 src="/profile.jpg"
                 alt="Manan Rathi"
-                className="relative z-10 w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
+                className="relative z-10 w-full h-full object-cover object-top rounded-2xl grayscale hover:grayscale-0 transition-all duration-500"
                 onError={e => {
                   e.target.style.display = 'none'
                   e.target.nextSibling.style.display = 'flex'
