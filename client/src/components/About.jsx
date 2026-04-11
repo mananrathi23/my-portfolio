@@ -45,7 +45,7 @@ export default function About() {
 
               {[
                 { icon: '⚛', label: 'React', pos: '-top-8 -right-6' },
-                { icon: '🟢', label: 'Node.js', pos: '-bottom-8 -right-6' },
+                { icon: '', label: 'Express.js', pos: '-bottom-8 -right-6' },
                 { icon: '☕', label: 'Spring Boot', pos: '-bottom-8 -left-6' },
                 { icon: '🐍', label: 'Python / AI', pos: '-top-8 -left-6' },
               ].map(({ icon, label, pos }, i) => (
@@ -66,9 +66,9 @@ export default function About() {
           {/* Right – bio */}
           <div>
             <span className="section-label">About me</span>
-            <h2 className="section-title">
+            <h4 className="section-title">
               The only way to go <span className="gradient-text">fast</span>, is to go <span className="gradient-text">well</span>.
-            </h2>
+            </h4>
 
             {/* Live status */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-green-400/20 mb-6 text-xs font-mono">

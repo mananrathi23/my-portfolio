@@ -47,7 +47,7 @@ const categories = [
     ]
   },
   {
-    label: 'AI & Machine Learning',
+    label: 'AI',
     icon: '🤖',
     description: 'Bridging the gap between software and hardware with real-time AI inference and deep learning deployed on edge devices.',
     project: 'ASL Detection on Raspberry Pi 4',
@@ -55,6 +55,7 @@ const categories = [
     videoSrc: null,
     skills: [
       { name: 'Python',        pct: 85, note: 'Model training & data processing' },
+      { name: 'Machine Learning', pct: 80, note:'Speech Emotion Recognition' },
       { name: 'Deep Learning', pct: 78, note: 'ASL Detection — LNMIIT Research Internship' },
       { name: 'MediaPipe',     pct: 82, note: 'Real-time gesture tracking' },
       { name: 'YOLOv8',        pct: 75, note: 'Logistics prediction models — Axestrack' },
@@ -91,12 +92,6 @@ const categories = [
   },
 ]
 
-const tagCloud = [
-  'React', 'Angular', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL',
-  'Java', 'Spring Boot', 'JavaScript', 'TypeScript', 'Python',
-  'YOLOv8', 'MediaPipe', 'Deep Learning', 'REST API', 'Git',
-  'Tailwind CSS', 'Framer Motion', 'DSA', 'C++', 'Postman', 'Vite',
-]
 
 function Typewriter({ text, speed = 22, onDone }) {
   const [displayed, setDisplayed] = useState('')
@@ -358,21 +353,6 @@ export default function Skills() {
               ))}
             </div>
             <TerminalCard category={categories[active]} />
-          </div>
-
-          <div className="flex flex-wrap gap-3 justify-center">
-            {tagCloud.map((tag, i) => (
-              <motion.span
-                key={tag}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.8 }}
-                transition={{ delay: i * 0.04, duration: 0.3 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                className="tech-badge cursor-default select-none"
-              >
-                {tag}
-              </motion.span>
-            ))}
           </div>
         </motion.div>
       </div>
