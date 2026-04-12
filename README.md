@@ -2,8 +2,7 @@
 
 A professional full-stack portfolio built with React.js, Node.js, Express.js, MongoDB, Three.js, and Tailwind CSS.
 
-🔗 **Live Site:** [your-portfolio.vercel.app](https://your-portfolio.vercel.app)  
-🔗 **API:**       [your-api.onrender.com](https://your-api.onrender.com)
+🔗 **Live Site:** https://my-portfolio-sooty-tau-79.vercel.app
 
 ---
 
